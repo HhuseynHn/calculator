@@ -71,7 +71,13 @@ button.forEach((e) => {
       b = 0;
       operator = "";
     } else if (e.innerHTML == "AC") {
-      screen.innerHTML = 0;
+      if (screen.innerHTML.toString().length > 1) {
+        screen.innerHTML = screen.innerHTML
+          .toString()
+          .substring(0, screen.innerHTML.toString().length - 1);
+      } else {
+        screen.innerHTML = 0;
+      }
     } else if (
       e.innerHTML == "+" ||
       e.innerHTML == "-" ||
@@ -87,35 +93,43 @@ button.forEach((e) => {
         operator = e.innerHTML;
       }
     } else if (e.innerHTML == "=") {
-      if (screen.innerHTML.toString().length > 14) {
-        console.log("big");
-      } else {
-        b = Number(screen.innerHTML);
-      }
+      b = Number(screen.innerHTML);
 
       if (operator == "+") {
-        if (plusFnc(a, b).toString().length > 14) {
+        if (
+          plusFnc(a, b).toString().length > 14 &&
+          plusFnc(a, b) > 9999999999999
+        ) {
           screen.innerHTML = `${plusFnc(a, b).toString().slice(0, 13)}-er`;
         } else {
-          screen.innerHTML = plusFnc(a, b);
+          screen.innerHTML = plusFnc(a, b).toFixed(2);
         }
       } else if (operator == "-") {
-        if (minusFnc(a, b).toString().length > 14) {
+        if (
+          minusFnc(a, b).toString().length > 14 &&
+          minusFnc(a, b) > 9999999999999
+        ) {
           screen.innerHTML = `${minusFnc(a, b).toString().slice(0, 13)}-er`;
         } else {
-          screen.innerHTML = minusFnc(a, b);
+          screen.innerHTML = minusFnc(a, b).toFixed(2);
         }
       } else if (operator == "/") {
-        if (dvideFnc(a, b).toString().length > 14) {
+        if (
+          dvideFnc(a, b).toString().length > 14 &&
+          dvideFnc(a, b) > 9999999999999
+        ) {
           screen.innerHTML = `${dvideFnc(a, b).toString().slice(0, 13)}-er`;
         } else {
-          screen.innerHTML = dvideFnc(a, b);
+          screen.innerHTML = dvideFnc(a, b).toFixed(2);
         }
       } else if (operator == "*") {
-        if (multipleFnc(a, b).toString().length > 14) {
+        if (
+          multipleFnc(a, b).toString().length > 14 &&
+          multipleFnc(a, b) > 9999999999999
+        ) {
           screen.innerHTML = `${multipleFnc(a, b).toString().slice(0, 13)}-er`;
         } else {
-          screen.innerHTML = multipleFnc(a, b);
+          screen.innerHTML = multipleFnc(a, b).toFixed(2);
         }
       }
     } else {
@@ -142,3 +156,4 @@ button.forEach((e) => {
     }
   });
 });
+
